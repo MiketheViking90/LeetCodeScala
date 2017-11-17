@@ -3,7 +3,7 @@ package domain
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class TreeNode(val data: Int = 0, var left: TreeNode = null, var right: TreeNode = null) {}
+class TreeNode(var value: Int = 0, var left: TreeNode = null, var right: TreeNode = null) {}
 
 object TreeNode {
 
@@ -15,6 +15,25 @@ object TreeNode {
       print(entry._1 + ": ")
       println(entry._2)
     }
+  }
+
+  def makeBST(): TreeNode = {
+    val node5 = new TreeNode(5)
+    val node3 = new TreeNode(3)
+    val node4 = new TreeNode(4)
+    val node12 = new TreeNode(12)
+    val node7 = new TreeNode(7)
+    val node16 = new TreeNode(16)
+
+    node5.left = node3
+    node5.right = node12
+
+    node3.right = node4
+
+    node12.left = node7
+    node12.right = node16
+
+    node5
   }
 
   def makeTree(): TreeNode = {
@@ -43,7 +62,7 @@ object TreeNode {
     }
 
     var curLevel = levelMap.getOrElse(lvl, new ArrayBuffer[Int])
-    curLevel.+=(root.data)
+    curLevel.+=(root.value)
     levelMap.put(lvl, curLevel)
 
     fillMap(root.left, lvl+1, levelMap)
