@@ -29,6 +29,15 @@ object ListNode {
     println(toString)
   }
 
+  def append(head: ListNode, n: Int): ListNode = {
+    var node = head
+    while (node.next != null) {
+      node = node.next
+    }
+    node.next = new ListNode(n)
+    head
+  }
+
   def main(args: Array[String]): Unit = {
     val node = makeList()
     printList(node)
