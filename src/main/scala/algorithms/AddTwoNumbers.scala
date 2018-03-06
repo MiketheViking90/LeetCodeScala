@@ -46,15 +46,92 @@ object AddTwoNumbers {
     head
   }
 
-  def main(args: Array[String]): Unit = {
-    val l1 = ListNode.makeList()
-    val l2 = ListNode.makeList()
-    ListNode.append(l2, 4)
-    ListNode.append(l2, 10)
-    ListNode.append(l2, 4)
-    ListNode.append(l2, 10)
+  def add2Numbers(l1: ListNode, l2: ListNode): ListNode = {
+    var l1Head = l1
+    var l2Head = l2
+    if (l1 == null) {
+      return l2
+    }
 
-    val sum = addTwoNumbers(l1, l2)
+    if (l2 == null) {
+      return l1
+    }
+
+    var head = null:ListNode
+    var cur = head
+    var carry = 0
+
+    while (l1Head != null && l2Head != null) {
+      var digit = l1Head.value + l2Head.value + carry
+      carry = 0
+      if (digit >= 10) {
+        digit -= 10
+        carry = 1
+      }
+
+      if (head == null) {
+        head = new ListNode(digit)
+        cur = head
+      } else {
+        cur.next = new ListNode(digit)
+        cur = cur.next
+      }
+
+      l1Head = l1Head.next
+      l2Head = l2Head.next
+    }
+
+    var tail = null:ListNode
+    if (l1Head != null) {
+      tail = l1Head
+    } else if (l2Head != null) {
+      tail = l2Head
+    }
+
+    appendTail(cur, tail, carry)
+
+    head
+  }
+
+  def appendTail(cur: ListNode, tail: ListNode, carry: Int): Unit = {
+    var isCarry = carry
+    var curNode = cur
+    var tailNode = tail
+
+    while (tailNode != null) {
+      var digit = tailNode.value + isCarry
+      isCarry = 0
+      if (digit >= 10) {
+        digit -= 10
+        isCarry = 1
+      }
+
+      curNode.next = new ListNode(digit)
+      curNode = curNode.next
+      tailNode = tailNode.next
+    }
+
+    if (isCarry == 1) {
+      curNode.next = new ListNode(1)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+//    val l1 = ListNode.makeList()
+//    val l2 = ListNode.makeList()
+//    ListNode.append(l2, 9)
+//    ListNode.append(l2, 9)
+//    ListNode.append(l2, 9)
+//    ListNode.append(l2, 9)
+    val l1 = new ListNode(2)
+    ListNode.append(l1, 4)
+    ListNode.append(l1, 3)
+
+    val l2 = new ListNode(5)
+    ListNode.append(l2, 6)
+    ListNode.append(l2, 4)
+
+    val sum = add2Numbers(l1, l2)
     ListNode.printList(sum)
   }
 }
