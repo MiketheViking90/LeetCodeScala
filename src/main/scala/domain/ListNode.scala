@@ -1,6 +1,6 @@
 package domain
 
-class ListNode(var value: Int, var next: ListNode = null) {}
+class ListNode(var x: Int, var next: ListNode = null) {}
 
 object ListNode {
 
@@ -22,7 +22,7 @@ object ListNode {
     var node = head
     var toString = ""
     while (node != null) {
-      toString += (node.value + ">")
+      toString += (node.x + ">")
       node = node.next
     }
 

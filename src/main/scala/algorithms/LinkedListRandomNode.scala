@@ -21,7 +21,7 @@ object LinkedListRandomNode {
       i -= 1
       node = node.next
     }
-    node.value
+    node.x
   }
 
   def getRandom(head: ListNode): Int = {

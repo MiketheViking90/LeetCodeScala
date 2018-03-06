@@ -15,8 +15,8 @@ object AddTwoNumbers {
     while (h1 != null || h2 != null) {
       var value = 0
 
-      if (h1 != null) value += h1.value
-      if (h2 != null) value += h2.value
+      if (h1 != null) value += h1.x
+      if (h2 != null) value += h2.x
 
       if (carry) {
         value += 1
@@ -62,7 +62,7 @@ object AddTwoNumbers {
     var carry = 0
 
     while (l1Head != null && l2Head != null) {
-      var digit = l1Head.value + l2Head.value + carry
+      var digit = l1Head.x + l2Head.x + carry
       carry = 0
       if (digit >= 10) {
         digit -= 10
@@ -99,7 +99,7 @@ object AddTwoNumbers {
     var tailNode = tail
 
     while (tailNode != null) {
-      var digit = tailNode.value + isCarry
+      var digit = tailNode.x + isCarry
       isCarry = 0
       if (digit >= 10) {
         digit -= 10

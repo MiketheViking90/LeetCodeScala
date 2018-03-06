@@ -7,8 +7,8 @@ import scala.collection.mutable
 object MergeKSortedLists {
 
   val listNodeOrdering = new Ordering[ListNode] {
-    override def compare(x: ListNode, y: ListNode): Int = {
-      x.value - y.value
+    override def compare(node1: ListNode, node2: ListNode): Int = {
+      node1.x - node2.x
     }
   }
 
