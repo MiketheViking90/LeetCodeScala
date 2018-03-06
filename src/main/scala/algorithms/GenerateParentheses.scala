@@ -25,8 +25,31 @@ object GenerateParentheses {
     }
   }
 
+  def genParen(n: Int): List[String] = {
+    val parens = ArrayBuffer[String]()
+    getParens(n-1, n, parens, "(")
+
+    parens.toList
+  }
+
+  def getParens(l: Int, r: Int, parens: ArrayBuffer[String], str: String): Unit = {
+    if (l == 0 && r == 0) {
+      parens += str
+      return
+    }
+
+    if (l > 0) {
+      getParens(l-1, r, parens, str + "(")
+    }
+
+    if (r > l) {
+      getParens(l, r-1, parens, str + ")")
+    }
+  }
+
+
   def main(args: Array[String]): Unit = {
-    val parens = generateParenthesis(4)
+    val parens = genParen(3)
     println(parens.mkString(", "))
   }
 
