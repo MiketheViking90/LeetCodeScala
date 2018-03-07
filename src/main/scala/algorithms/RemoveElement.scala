@@ -28,9 +28,17 @@ object RemoveElement {
     }
 
     val n = nums.length
-    if (n == 0 || n == 1) {
+    if (n == 0) {
       return n
     }
+    if (n == 1) {
+      if (nums(0) == v) {
+        return 0
+      } else {
+        return 1
+      }
+    }
+
 
     var i = 0
     var j = 1
@@ -41,24 +49,28 @@ object RemoveElement {
       val nj = nums(j)
 
       if (ni != v && nj != v) {
-        i += 1
-        j += 1
-      } else if (i != v && j == v) {
+        cnt += 2
+
+        i += 2
+        j += 2
+      } else if (ni != v && nj == v) {
+        cnt += 1
         i = getNext(j, v, nums)
 
         if (i == -1) {
           return cnt
         }
-
-        cnt += 1
         swap(i, j, nums)
         j = getNext(j, v, nums)
-      } else if (i == v && j != v) {
+      } else if (ni == v && nj != v) {
+        cnt += 1
         j = getNext(j, v, nums)
+        if (j == -1) {
+          return cnt
+        }
         swap(i, j, nums)
         i = j
         j += 1
-        cnt += 1
       } else {
         j += 1
       }
@@ -68,8 +80,8 @@ object RemoveElement {
   }
 
   def main(args: Array[String]): Unit = {
-    val nums = Array(3,3,3,3)
-    val k = 3
+    val nums = Array(3,4)
+    val k = 5
 
     val n = removeElement(nums, k)
     println(n)
