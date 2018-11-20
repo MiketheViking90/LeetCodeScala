@@ -1,5 +1,7 @@
 package designpatterns.observer
 
-class Subscriber {
+trait Subscriber {
+
+  def update(data: Double)
 
 }
